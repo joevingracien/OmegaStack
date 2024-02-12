@@ -23,9 +23,6 @@ module.exports = {
   // Base config
   extends: ["eslint:recommended"],
 
-  rules: {
-    "react/no-unknown-property": ["off", { ignore: ["TSX"] }],
-  },
 
   overrides: [
     // React
@@ -58,6 +55,10 @@ module.exports = {
       files: ["**/*.{ts,tsx}"],
       plugins: ["@typescript-eslint", "import"],
       parser: "@typescript-eslint/parser",
+      rules: {
+        "react/no-unknown-property": ["off", { ignore: ["TSX"] }],
+      },
+    
       settings: {
         "import/internal-regex": "^~/",
         "import/resolver": {
@@ -75,6 +76,8 @@ module.exports = {
         "plugin:import/typescript",
       ],
     },
+
+    
 
     // Node
     {
