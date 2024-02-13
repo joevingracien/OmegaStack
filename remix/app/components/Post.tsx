@@ -3,11 +3,10 @@
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "@sanity/client";
-
 import { projectId, dataset } from "../sanity/projectDetails";
 
 const builder = imageUrlBuilder({ projectId, dataset });
-
+  
 export default function Post({ post }: { post: SanityDocument }) {
   const { title, mainImage, body } = post;
 

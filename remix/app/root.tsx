@@ -10,15 +10,15 @@ import {
 } from "@remix-run/react";
 import { Suspense, lazy } from "react";
 
-const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+const LiveVisualEditing = lazy(() => import("./components/LiveVisualEditing"));
 
-export const loader = ({ context }) => {
+export const loader = () => {
   return json({
     ENV: {
-      SANITY_STUDIO_PROJECT_ID: context.env.SANITY_STUDIO_PROJECT_ID,
-      SANITY_STUDIO_DATASET: context.env.SANITY_STUDIO_DATASET,
-      SANITY_STUDIO_URL: context.env.SANITY_STUDIO_URL,
-      SANITY_STUDIO_STEGA_ENABLED: context.env.SANITY_STUDIO_STEGA_ENABLED,
+      SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
+      SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
+      SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
+      SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     },
   });
 };

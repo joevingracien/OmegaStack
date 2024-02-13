@@ -14,7 +14,7 @@ const {
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_URL = 'http://localhost:3333',
   SANITY_STUDIO_STEGA_ENABLED = false
-} = typeof document === 'undefined' ? context.env : window.ENV
+} = typeof document === 'undefined' ? process.env : window.ENV
 
 export const projectId = SANITY_STUDIO_PROJECT_ID!
 export const dataset = SANITY_STUDIO_DATASET!
