@@ -1,8 +1,10 @@
+// ./components/Post.tsx
+
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "@sanity/client";
 
-import { projectId, dataset } from "../sanity/projectDetails";
+import { projectId, dataset } from "~/sanity/projectDetails";
 
 const builder = imageUrlBuilder({ projectId, dataset });
 

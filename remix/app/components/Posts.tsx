@@ -1,3 +1,5 @@
+// ./app/components/Posts.tsx
+
 import { Link } from "@remix-run/react";
 import type { SanityDocument } from "@sanity/client";
 

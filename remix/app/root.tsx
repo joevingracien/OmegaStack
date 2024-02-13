@@ -1,7 +1,7 @@
-import "./tailwind.css";
-import { json } from "@remix-run/cloudflare";
+import { json } from "@remix-run/node";
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 import { Suspense, lazy } from "react";
 
-const LiveVisualEditing = lazy(() => import("./components/LiveVisualEditing"));
+const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export const loader = () => {
   return json({
@@ -25,6 +25,7 @@ export const loader = () => {
 
 export default function App() {
   const { ENV } = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -32,8 +33,9 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script src="https://cdn.tailwindcss.com?plugins=typography" />
       </head>
-      <body>
+      <body className="bg-white">
         <Outlet />
         <ScrollRestoration />
         <script
@@ -47,6 +49,7 @@ export default function App() {
           </Suspense>
         ) : null}
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );

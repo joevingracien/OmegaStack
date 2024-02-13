@@ -1,6 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
 import type { SanityDocument } from "@sanity/client";
-
 import Posts from "../components/Posts";
 import { useQuery } from "../sanity/loader";
 import { loadQuery } from "../sanity/loader.server";
