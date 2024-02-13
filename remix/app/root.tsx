@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json } from "@remix-run/cloudflare";
 import {
   Links,
   LiveReload,
@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 import { Suspense, lazy } from "react";
 
-const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+const LiveVisualEditing = lazy(() => import("./components/LiveVisualEditing"));
 
 export const loader = () => {
   return json({
