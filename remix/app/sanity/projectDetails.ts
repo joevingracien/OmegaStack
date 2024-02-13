@@ -11,28 +11,21 @@ declare global {
   }
 }
 
-// Define a type for the project details to ensure type safety
-type ProjectDetails = {
-  projectId: string;
-  dataset: string;
-  studioUrl: string;
-  stegaEnabled: boolean;
-};
-
-// This function is intended for server-side usage to initialize project details from the context
-export function initializeProjectDetails(context?: { env: typeof process.env }): ProjectDetails {
+// This function should be called on the server-side where `context` is available.
+export function initializeProjectDetails(context?: { env: typeof process.env }) {
   const {
     SANITY_STUDIO_PROJECT_ID,
     SANITY_STUDIO_DATASET,
     SANITY_STUDIO_URL = 'http://localhost:3333',
-    SANITY_STUDIO_STEGA_ENABLED = 'false', // Default to 'false' as a string
-  } = context ? context.env : {};
+    SANITY_STUDIO_STEGA_ENABLED = false,
+  } = context ? context.env : window.ENV;
 
   if (!SANITY_STUDIO_PROJECT_ID) throw new Error('Missing SANITY_STUDIO_PROJECT_ID in .env');
   if (!SANITY_STUDIO_DATASET) throw new Error('Missing SANITY_STUDIO_DATASET in .env');
   if (!SANITY_STUDIO_URL) throw new Error('Missing SANITY_STUDIO_URL in .env');
-  if (SANITY_STUDIO_STEGA_ENABLED !== 'true' && SANITY_STUDIO_STEGA_ENABLED !== 'false') throw new Error(`Invalid SANITY_STUDIO_STEGA_ENABLED value in .env`);
+  if (typeof SANITY_STUDIO_STEGA_ENABLED === 'string' && SANITY_STUDIO_STEGA_ENABLED !== 'true') throw new Error(`Missing SANITY_STUDIO_STEGA_ENABLED in .env`);
 
+  // Exporting as an object to be used wherever needed
   return {
     projectId: SANITY_STUDIO_PROJECT_ID,
     dataset: SANITY_STUDIO_DATASET,
@@ -40,16 +33,3 @@ export function initializeProjectDetails(context?: { env: typeof process.env }):
     stegaEnabled: SANITY_STUDIO_STEGA_ENABLED === 'true',
   };
 }
-
-// Client-side fallback using window.ENV or default values
-export const clientSideProjectDetails: ProjectDetails = typeof window !== 'undefined' && window.ENV ? {
-  projectId: window.ENV.SANITY_STUDIO_PROJECT_ID,
-  dataset: window.ENV.SANITY_STUDIO_DATASET,
-  studioUrl: window.ENV.SANITY_STUDIO_URL,
-  stegaEnabled: window.ENV.SANITY_STUDIO_STEGA_ENABLED === 'true',
-} : {
-  projectId: 'default_project_id',
-  dataset: 'default_dataset',
-  studioUrl: 'http://localhost:3333',
-  stegaEnabled: false,
-};
