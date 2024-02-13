@@ -4,9 +4,12 @@ import Posts from "../components/Posts";
 import { useQuery } from "../sanity/loader";
 import { loadQuery } from "../sanity/loader.server";
 import { POSTS_QUERY } from "../sanity/queries";
+import { initializeProjectDetails } from "../sanity/projectDetails";
 
 export const loader = async () => {
-  const initial = await loadQuery<SanityDocument[]>(POSTS_QUERY);
+  const { projectId, dataset } = initializeProjectDetails(context);
+
+  const initial = await loadQuery<SanityDocument[]>(POSTS_QUERY, { projectId, dataset });
 
   return { initial, query: POSTS_QUERY, params: {} };
 };

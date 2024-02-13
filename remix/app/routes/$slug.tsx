@@ -1,3 +1,5 @@
+// Assuming initializeProjectDetails is exported from projectDetails.ts
+import { initializeProjectDetails } from '../sanity/projectDetails';
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { SanityDocument } from "@sanity/client";
@@ -7,8 +9,12 @@ import { useQuery } from "../sanity/loader";
 import { loadQuery } from "../sanity/loader.server";
 import { POST_QUERY } from "../sanity/queries";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const initial = await loadQuery<SanityDocument>(POST_QUERY, params);
+export const loader = async ({ params, context }: LoaderFunctionArgs) => {
+  // Initialize project details using the context
+  const { projectId, dataset } = initializeProjectDetails(context);
+
+  // Use projectId and dataset as needed, for example, to modify POST_QUERY or fetch data
+  const initial = await loadQuery<SanityDocument>(POST_QUERY, { ...params, projectId, dataset });
 
   return { initial, query: POST_QUERY, params };
 };
