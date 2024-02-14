@@ -7,8 +7,5 @@ import * as build from "../build/server";
 
 export const onRequest = createPagesFunctionHandler({
   build,
-  getLoadContext: (context) => ({ SANITY_STUDIO_PROJECT_ID: context.env.SANITY_STUDIO_PROJECT_ID,
-    SANITY_STUDIO_DATASET: context.env.SANITY_STUDIO_DATASET,
-    SANITY_STUDIO_URL: context.env.SANITY_STUDIO_URL || 'http://localhost:3333',
-    SANITY_STUDIO_STEGA_ENABLED: context.env.SANITY_STUDIO_STEGA_ENABLED || false }),
+  getLoadContext: (context) => ({ env: context.env }),
 });

@@ -1,5 +1,7 @@
 import { createClient } from "@sanity/client";
-import { stegaEnabled, projectId, dataset, studioUrl } from "./projectDetails";
+import { getProjectDetails } from "./projectDetails";
+
+const { projectId, dataset, studioUrl, stegaEnabled } = getProjectDetails(env);
 
 // Do not import this into client-side components unless lazy-loaded
 export const client = createClient({

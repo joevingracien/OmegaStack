@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const {
+const { sanity } = {
   SANITY_STUDIO_PROJECT_ID,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_URL = 'http://localhost:3333',
