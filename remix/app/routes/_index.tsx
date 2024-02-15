@@ -5,7 +5,8 @@ import { useQuery } from "../sanity/loader";
 import { loadQuery } from "../sanity/loader.server";
 import { POSTS_QUERY } from "../sanity/queries";
 
-export const loader = async () => {
+export const loader = async ({context}) => {
+  console.log(context.env);
   const initial = await loadQuery<SanityDocument[]>(POSTS_QUERY);
 
   return { initial, query: POSTS_QUERY, params: {} };
