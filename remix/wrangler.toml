@@ -1,3 +1,9 @@
-kv_namespaces = [
-  { id = "MY_KV", binding="MY_KV" }
-]
+name = "your-project-name"
+
+# Define your environment variables here
+[vars]
+SANITY_STUDIO_PROJECT_ID="lskyzkda"
+SANITY_STUDIO_DATASET="production"
+SANITY_STUDIO_URL="http://localhost:3333"
+SANITY_STUDIO_STEGA_ENABLED = false
+
